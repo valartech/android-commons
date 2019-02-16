@@ -1,6 +1,19 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.github.dcendents.android-maven'
+
+
+static def getAppVersionCode() {
+    return 1
+}
+
+static def getAppVersionName() {
+    return "0.1.0"
+}
+
+group = 'com.github.valartech'
+version = getAppVersionName()
 
 android {
     compileSdkVersion 28
@@ -9,8 +22,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode getAppVersionCode()
+        versionName getAppVersionName()
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -32,6 +45,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //android
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
 
     //kotlin
     implementation "androidx.core:core-ktx:1.1.0-alpha04"
