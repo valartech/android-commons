@@ -9,9 +9,9 @@ Utilities and libraries used across most projects, in one nice bundle.
 
 ```
 allprojects {
-    repositories {
+    repositories { //not under buildscript
         jcenter()
-        maven { url "https://jitpack.io" }
+        maven { url "https://jitpack.io" } 
     }
 }
 

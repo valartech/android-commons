@@ -9,7 +9,7 @@ static def getAppVersionCode() {
 }
 
 static def getAppVersionName() {
-    return "0.2.1"
+    return "0.2.2-SNAPSHOT"
 }
 
 group = 'com.github.valartech'
@@ -94,7 +94,7 @@ task sourcesJar(type: Jar) {
 }
 
 artifacts {
-//    archives classesJar
+    archives classesJar
     archives sourcesJar
     archives javadocJar
 }
