@@ -6,7 +6,7 @@ buildscript {
         apollo_version = '1.0.1-SNAPSHOT'
         support_lib_version = '1.0.0'
         googleServicesVersion = '16.0.1'
-        lifecycle_version = '2.1.0-alpha01'
+        lifecycle_version = '2.1.0-alpha02'
         moshi_version = '1.8.0'
         retrofit_version = '2.5.0'
         hyperion_version = '0.9.27'
