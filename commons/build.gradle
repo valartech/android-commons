@@ -5,11 +5,11 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 
 static def getAppVersionCode() {
-    return 2
+    return 3
 }
 
 static def getAppVersionName() {
-    return "0.2.0"
+    return "0.2.1"
 }
 
 group = 'com.github.valartech'
@@ -76,7 +76,6 @@ task javadoc(type: Javadoc) {
     failOnError false
     source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
 }
 
 // build a jar with javadoc
@@ -95,7 +94,7 @@ task sourcesJar(type: Jar) {
 }
 
 artifacts {
-    archives classesJar
+//    archives classesJar
     archives sourcesJar
     archives javadocJar
 }
