@@ -2,8 +2,6 @@ package com.valartech.commons.utils
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.AssetManager
-import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,13 +17,6 @@ fun <T : AppCompatActivity> AppCompatActivity.startActivity(clazz: KClass<T>) {
 
 fun ViewGroup.inflate(layoutRes: Int): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, false)
-}
-
-fun AssetManager.getProximaNovaRegTypeface(): Typeface {
-    return Typeface.createFromAsset(
-        this,
-        "fonts/proxima_nova_alt_regular_file.ttf"
-    )
 }
 
 fun Float.formatINR(): String {
