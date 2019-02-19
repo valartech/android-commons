@@ -6,11 +6,11 @@ apply plugin: 'org.jetbrains.dokka-android'
 
 
 static def getAppVersionCode() {
-    return 3
+    return 4
 }
 
 static def getAppVersionName() {
-    return "0.2.2"
+    return "0.2.3"
 }
 
 group = 'com.github.valartech'
@@ -106,10 +106,10 @@ task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
     from "$buildDir/javadoc"
 }
 
-
-task classesJar(type: Jar) {
-    from "$buildDir/intermediates/classes/release"
-}
+//
+//task classesJar(type: Jar) {
+//    from "$buildDir/intermediates/classes/release"
+//}
 
 task sourcesJar(type: Jar) {
     classifier = 'sources'
@@ -117,7 +117,6 @@ task sourcesJar(type: Jar) {
 }
 
 artifacts {
-    archives classesJar
     archives sourcesJar
     archives javadocJar
 }
