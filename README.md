@@ -18,4 +18,16 @@ allprojects {
 dependencies {
     implementation "com.github.valartech:android-commons:${version}"
 }
+```
 
+Use the snapshot version by using
+```
+implementation "com.github.valartech:android-commons:master-SNAPSHOT"
+```
+instead, and adding the following to your module `build.gradle`:
+```
+configurations.all {
+    // Check for updates every build for SNAPSHOTs
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+```
