@@ -1,5 +1,5 @@
 @file:Suppress("NOTHING_TO_INLINE", "unused", "TooManyFunctions")
-package com.valartech.commons.utils
+package com.valartech.commons.utils.extensions
 
 import android.content.Context
 import android.widget.Toast

@@ -1,6 +1,6 @@
-package com.valartech.commons.network
+package com.valartech.commons.network.google
 
-import com.valartech.commons.network.Status.*
+import com.valartech.commons.network.google.Status.*
 
 /**
  * A generic class that holds a value with its loading status.

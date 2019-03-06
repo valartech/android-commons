@@ -21,11 +21,6 @@ import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.valartech.commons.network.Resource
-import com.valartech.commons.network.ApiEmptyResponse
-import com.valartech.commons.network.ApiErrorResponse
-import com.valartech.commons.network.ApiResponse
-import com.valartech.commons.network.ApiSuccessResponse
 import net.broachcutter.vendorapp.network.google.AppExecutors
 import timber.log.Timber
 

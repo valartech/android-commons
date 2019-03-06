@@ -18,7 +18,7 @@ package com.valartech.commons.network.retrofit
 
 
 import androidx.lifecycle.LiveData
-import com.valartech.commons.network.ApiResponse
+import com.valartech.commons.network.google.ApiResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Callback

@@ -1,3 +1,5 @@
+package com.valartech.commons.utils.exceptions
+
 //todo figure how to genericize this
 
 //package com.valartech.commons.utils

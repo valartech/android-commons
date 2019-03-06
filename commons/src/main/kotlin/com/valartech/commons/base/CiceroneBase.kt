@@ -1,4 +1,4 @@
-package com.valartech.commons.utils
+package com.valartech.commons.base
 
 import android.content.Context
 import android.content.Intent

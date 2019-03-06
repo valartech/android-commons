@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.valartech.commons.network
+package com.valartech.commons.network.google
 
 import retrofit2.Response
 import timber.log.Timber
@@ -28,7 +28,9 @@ import java.util.regex.Pattern
 sealed class ApiResponse<T> {
     companion object {
         fun <T> create(error: Throwable): ApiErrorResponse<T> {
-            return ApiErrorResponse(error.message ?: "unknown error")
+            return ApiErrorResponse(
+                error.message ?: "unknown error"
+            )
         }
 
         fun <T> create(response: Response<T>): ApiResponse<T> {

@@ -1,4 +1,4 @@
-package com.valartech.commons.network
+package com.valartech.commons.network.blog
 
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -22,12 +22,17 @@ suspend fun <T : Any> Deferred<Response<T>>.awaitResult(): HTTPResult<T> {
                                 HTTPResult.Exception(Exception("body is empty"))
                             }
                             else{
-                                HTTPResult.Exception(NullPointerException("Response body is null"))
+                                HTTPResult.Exception(
+                                    NullPointerException("Response body is null")
+                                )
                             }
                         }
 
                     } else {
-                        HTTPResult.Error(HttpException(response), response.raw())
+                        HTTPResult.Error(
+                            HttpException(response),
+                            response.raw()
+                        )
                     }
                 )
             }

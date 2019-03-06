@@ -1,4 +1,4 @@
-package com.valartech.commons.utils
+package com.valartech.commons.utils.extensions
 
 import android.content.Context
 import android.content.res.Resources

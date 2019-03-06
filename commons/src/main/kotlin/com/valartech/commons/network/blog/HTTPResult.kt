@@ -1,4 +1,4 @@
-package com.valartech.commons.network
+package com.valartech.commons.network.blog
 
 import okhttp3.Response
 import retrofit2.HttpException
@@ -14,7 +14,8 @@ sealed class HTTPResult<out T : Any> {
     class Ok<out T : Any>(
         val value: T,
         override val response: Response
-    ) : HTTPResult<T>(), ResponseResult {
+    ) : HTTPResult<T>(),
+        ResponseResult {
         override fun toString() = "HTTPResult.Ok{value=$value, response=$response}"
     }
 
@@ -24,7 +25,9 @@ sealed class HTTPResult<out T : Any> {
     class Error(
         override val exception: HttpException,
         override val response: Response
-    ) : HTTPResult<Nothing>(), ErrorResult, ResponseResult {
+    ) : HTTPResult<Nothing>(),
+        ErrorResult,
+        ResponseResult {
         override fun toString() = "HTTPResult.Error{exception=$exception}"
     }
 
@@ -34,7 +37,8 @@ sealed class HTTPResult<out T : Any> {
      */
     class Exception(
         override val exception: Throwable
-    ) : HTTPResult<Nothing>(), ErrorResult {
+    ) : HTTPResult<Nothing>(),
+        ErrorResult {
         override fun toString() = "HTTPResult.Exception{$exception}"
     }
 

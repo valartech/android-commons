@@ -1,6 +1,7 @@
-package com.valartech.commons.network
+package com.valartech.commons.network.blog
 
 import androidx.lifecycle.MutableLiveData
+import com.valartech.commons.network.google.Resource
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
