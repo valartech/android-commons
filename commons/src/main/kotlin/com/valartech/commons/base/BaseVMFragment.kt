@@ -2,7 +2,7 @@ package com.valartech.commons.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
-import com.valartech.commons.utils.ViewModelFactory
+import com.valartech.commons.aac.ViewModelFactory
 import javax.inject.Inject
 
 abstract class BaseVMFragment<VM : ViewModel> : BaseFragment() {

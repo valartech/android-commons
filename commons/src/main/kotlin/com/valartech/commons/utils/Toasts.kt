@@ -4,6 +4,8 @@ package com.valartech.commons.utils
 import android.content.Context
 import android.widget.Toast
 import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 
 /*
  * Copyright 2016 JetBrains s.r.o.
@@ -46,14 +48,14 @@ inline fun Context.toast(message: Int): Toast = Toast
  *
  * @param message the message text.
  */
-inline fun AnkoContext<*>.toast(message: CharSequence) = ctx.toast(message)
+inline fun AnkoContext<*>.toast(message: CharSequence?) = message?.let { ctx.toast(it) }
 
 /**
  * Display the simple Toast message with the [Toast.LENGTH_SHORT] duration.
  *
  * @param message the message text.
  */
-inline fun Context.toast(message: CharSequence): Toast = Toast
+inline fun Context.toast(message: CharSequence?): Toast = Toast
     .makeText(this, message, Toast.LENGTH_SHORT)
     .apply {
         show()
@@ -78,7 +80,7 @@ inline fun androidx.fragment.app.Fragment.toast(message: Int) = activity?.toast(
  *
  * @param message the message text.
  */
-inline fun androidx.fragment.app.Fragment.toast(message: CharSequence) = activity?.toast(message)
+inline fun androidx.fragment.app.Fragment.toast(message: CharSequence?) = activity?.toast(message)
 
 /**
  * Display the simple Toast message with the [Toast.LENGTH_LONG] duration.
@@ -103,14 +105,18 @@ inline fun Context.longToast(message: Int): Toast = Toast
  *
  * @param message the message text.
  */
-inline fun AnkoContext<*>.longToast(message: CharSequence) = ctx.longToast(message)
+inline fun AnkoContext<*>.longToast(message: CharSequence?) = message?.let { ctx.longToast(it) }
 
 /**
  * Display the simple Toast message with the [Toast.LENGTH_LONG] duration.
  *
  * @param message the message text.
  */
-inline fun androidx.fragment.app.Fragment.longToast(message: CharSequence) = activity?.longToast(message)
+inline fun androidx.fragment.app.Fragment.longToast(message: CharSequence?) = message?.let {
+    activity?.longToast(
+        it
+    )
+}
 
 /**
  * Display the simple Toast message with the [Toast.LENGTH_LONG] duration.
