@@ -34,6 +34,9 @@ fun Float.removeTrailingZeroes(): String {
     return DecimalFormat("#").format(this)
 }
 
+fun String?.isValidEmail() =
+    !this.isNullOrBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
 fun View.setVisibility(isVisible: Boolean, setInvisible: Boolean = false) {
     visibility = if (isVisible) {
         View.VISIBLE
