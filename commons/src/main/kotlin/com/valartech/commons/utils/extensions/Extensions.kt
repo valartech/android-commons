@@ -73,6 +73,9 @@ fun TextView.removeUnderline() {
 }
 
 /**
+ * Gets all children recursively for this parent view. Uses Breadth-first search to traverse the
+ * view hierarchy.
+ *
  * https://stackoverflow.com/a/18669307/3460025
  */
 fun View.getAllChildren(): List<View> {
