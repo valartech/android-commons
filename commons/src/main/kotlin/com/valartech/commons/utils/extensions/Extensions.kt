@@ -34,6 +34,17 @@ fun Float.formatINRwithPrefix(context: Context?): String {
     } ?: formattedNum
 }
 
+fun Double.formatINR(): String {
+    return DecimalFormat("##,##,##,##,##0").format(this)
+}
+
+fun Double.formatINRwithPrefix(context: Context?): String {
+    val formattedNum = this.formatINR()
+    return context?.let {
+        String.format(context.getString(R.string.rs_string), formattedNum)
+    } ?: formattedNum
+}
+
 fun Float.removeTrailingZeroes(): String {
     return DecimalFormat("#").format(this)
 }
