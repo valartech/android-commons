@@ -16,6 +16,7 @@ class AuthHeaderInterceptor @Inject constructor() : Interceptor {
         private const val AUTH_HEADER_KEY = "Authorization"
     }
 
+    var tokenPrefix: String? = null
     var sessionToken: String? = null
 
     @Throws(IOException::class)
@@ -24,7 +25,7 @@ class AuthHeaderInterceptor @Inject constructor() : Interceptor {
 
         val requestBuilder = request.newBuilder()
         sessionToken?.let {
-            requestBuilder.addHeader(AUTH_HEADER_KEY, "Bearer $it")
+            requestBuilder.addHeader(AUTH_HEADER_KEY, tokenPrefix + it)
         }
 
         return chain.proceed(requestBuilder.build())
