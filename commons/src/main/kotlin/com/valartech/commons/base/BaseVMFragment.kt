@@ -59,20 +59,7 @@ abstract class BaseVMFragment<VM : ViewModel> : BaseFragment() {
     public boolean onQueryTextSubmit(final String query) {
     return false;
     }
-
-    @Override
-    public boolean onQueryTextChange(final String newText) {
-    doActionWithQuery(newText);
-    return false;
-    }
-    }, filterClick -> {
-    openDrawer();
-    return false;
-    })
-    .withSearchHint(R.string.search_view_hint)
-    .onHomePressedDefaultAction()
-    .build();
-    }
+     
      */
     //toolbar fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
