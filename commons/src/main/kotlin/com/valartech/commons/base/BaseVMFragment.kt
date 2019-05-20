@@ -48,18 +48,7 @@ abstract class BaseVMFragment<VM : ViewModel> : BaseFragment() {
 
     /**
      * how to use
-     * @Override
-    protected FragmentToolbar builder() {
-    return new FragmentToolbar.Builder()
-    .withId(R.id.toolbar)
-    .withTitle(R.string.toolbar_title)
-    .withMenu(R.menu.menu_options)
-    .withSearchAndFilters(new SearchView.OnQueryTextListener() {
-    @Override
-    public boolean onQueryTextSubmit(final String query) {
-    return false;
-    }
-     
+    https://medium.com/appunite-edu-collection/fragment-toolbar-manage-it-better-a6a6ef31d43
      */
     //toolbar fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
