@@ -1,15 +1,12 @@
 package com.valartech.commons.base
 
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.valartech.commons.aac.ViewModelFactory
 import com.valartech.commons.aac.navigation.NavigationCommand
-import com.valartech.commons.fragment_toolbar.FragmentToolbar
-import com.valartech.commons.fragment_toolbar.ToolbarManager
 import javax.inject.Inject
 
 /**
@@ -45,12 +42,4 @@ abstract class BaseVMFragment<VM : ViewModel> : BaseFragment() {
         }
 
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        ToolbarManager(builder(), view).prepareToolbar()
-    }
-
-    protected abstract fun builder(): FragmentToolbar
 }
