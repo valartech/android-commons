@@ -13,6 +13,9 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
     @Suppress("MemberVisibilityCanBePrivate")
     lateinit var client: Deferred<Response<RESPONSE>>
 
+    /**
+     * Used in conjunction with [networkCall].
+     */
     fun makeCall(scope: CoroutineScope): MutableLiveData<Resource<DATA>> {
         val result = MutableLiveData<Resource<DATA>>()
         result.value = Resource.loading(null)
@@ -35,6 +38,11 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
     }
 }
 
+/**
+ * Cuts down the boilerplate for making network calls.
+ *
+ * Usage details: https://proandroiddev.com/oversimplified-network-call-using-retrofit-livedata-kotlin-coroutines-and-dsl-512d08eadc16
+ */
 fun <RESPONSE : DataResponse<*>, DATA : Any> networkCall(scope: CoroutineScope = GlobalScope, block: CallHandler<RESPONSE, DATA>.() -> Unit)
         : MutableLiveData<Resource<DATA>> = CallHandler<RESPONSE, DATA>().apply(block).makeCall(scope)
 
