@@ -95,7 +95,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
                     }
                 }
                 is ApiErrorResponse -> {
-                    onFetchFailed()
+                    onFetchFailed(response.errorMessage)
                     result.addSource(dbSource) { newData ->
                         setValue(Resource.error(response.errorMessage, newData))
                     }
@@ -104,7 +104,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
         }
     }
 
-    protected open fun onFetchFailed() {}
+    protected open fun onFetchFailed(errorMessage: String) {}
 
     fun asLiveData() = result as LiveData<Resource<ResultType>>
 
