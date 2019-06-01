@@ -25,7 +25,7 @@ class AuthHeaderInterceptor @Inject constructor() : Interceptor {
 
         val requestBuilder = request.newBuilder()
         sessionToken?.let { sessionToken ->
-            val prefixedToken = tokenPrefix?.let { tokenPrefix + it } ?: sessionToken
+            val prefixedToken = tokenPrefix?.let { it + sessionToken} ?: sessionToken
             requestBuilder.addHeader(AUTH_HEADER_KEY, prefixedToken)
         }
 

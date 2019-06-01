@@ -20,8 +20,8 @@ import com.valartech.commons.R
  * Add in, top to bottom: loading view(like a progressbar), loaded view(actual layout) and a view for
  * the zero state.
  * <p />
- * Note that the order of the views as laid out in XML is significant: this layout will misbehave if
- * the order noted above isn't followed.
+ * Note that the order of the views as laid out in XML is significant if the second method is
+ * used: this layout will misbehave if the order noted above isn't followed.
  */
 @Suppress("MemberVisibilityCanBePrivate")
 class LoadingLayout @JvmOverloads constructor(
@@ -33,6 +33,7 @@ class LoadingLayout @JvmOverloads constructor(
     private var loadingView: View? = null
     private var completeView: View? = null
     private var emptyView: View? = null
+    private var overlayView: View? = null
     private val defaultState: Int
     private var currentState: Int? = null
     private val shortAnimDuration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
