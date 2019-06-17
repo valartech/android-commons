@@ -16,6 +16,10 @@ class Resource<out T>(status: Status, val data: T?, val message: String?) {
         null
     }
 
+    /**
+     * If we want to check the status without marking it as handled. Useful for transformations.
+     */
+    fun peekStatus() = status
 
     companion object {
         fun <T> success(data: T?): Resource<T> {
