@@ -1,1 +1,3 @@
+rootProject.name = 'AndroidCommons'
+
 include ':app', ':commons'
