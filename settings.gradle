@@ -1,3 +1,5 @@
 rootProject.name = 'AndroidCommons'
 
 include ':app', ':commons'
+
+project(":app").name = "demo"
