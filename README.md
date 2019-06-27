@@ -31,3 +31,46 @@ configurations.all {
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 ```
+
+## Using in Composite builds
+
+In case you have a copy of this project locally and want to include the 
+files from the local copy rather than the remote:
+
+In your project, add the following to `settings.gradle`
+```
+if (file("../Common/.composite-enable").exists()) {
+    includeBuild ('../Common/') {
+        dependencySubstitution {
+            substitute module('com.github.valartech:android-commons') with project(':commons')
+        }
+    }
+}
+``` 
+
+Add these tasks to your project `build.gradle`:
+```
+task enableCommonsCompositeBuild {
+    group = 'Tools'
+    description = 'Enable Commons composite build'
+    doLast {
+        new File("../Common/.composite-enable").createNewFile()
+    }
+}
+
+task disableCommonsBuild {
+    group = 'Tools'
+    description = 'Disable Commons composite build'
+    doLast {
+        File file = file("../Common/.composite-enable")
+        if (file.exists()) {
+            file.delete()
+        }
+    }
+}
+```
+Run as needed to enable/disable composite builds. 
+
+Note that your copy of this project needs
+1. To be a sibling project to your copy of your own project.
+2. To be inside a folder named "Common".  
