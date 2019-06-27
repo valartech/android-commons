@@ -9,22 +9,8 @@ import com.valartech.commons.network.google.Status.*
 data class Resource<out T>(
     val status: Status,
     val data: T?,
-    val message: String?,
-    var isHandled: Boolean = false
+    val message: String?
 ) {
-
-//    val status: Status? = status
-//    get() = if (field?.isHandled == false) {
-//        field.isHandled = true
-//        field
-//    } else {
-//        null
-//    }
-
-//    /**
-//     * If we want to check the status without marking it as handled. Useful for transformations.
-//     */
-//    fun peekStatus() = status
 
     companion object {
         fun <T> success(data: T?): Resource<T> {
@@ -39,10 +25,6 @@ data class Resource<out T>(
             return Resource(LOADING, data, null)
         }
     }
-
-//    fun getStatusIfNotHandled(): Status? {
-//        return status.isHandled.let { null } ?: status
-//    }
 }
 
 /**
@@ -56,9 +38,3 @@ enum class Status {
     ERROR,
     LOADING
 }
-
-//sealed class Status(var isHandled: Boolean = false) {
-//    object SUCCESS: Status()
-//    object ERROR: Status()
-//    object LOADING: Status()
-//}
