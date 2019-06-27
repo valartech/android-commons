@@ -1,6 +1,7 @@
 package com.valartech.commons.aac
 
 import androidx.lifecycle.Observer
+import timber.log.Timber
 
 /**
  * A wrapped observer which will only send changed data to delegate when predicate is true.
@@ -20,8 +21,12 @@ internal class FreshObserver<T>(
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-        other as FreshObserver<*>
-        if (delegate != other.delegate) return false
+        try {
+            other as FreshObserver<*>
+            if (delegate != other.delegate) return false
+        } catch (e: ClassCastException) {
+            Timber.e(e.printStackTrace().toString())
+        }
         return true
     }
 
