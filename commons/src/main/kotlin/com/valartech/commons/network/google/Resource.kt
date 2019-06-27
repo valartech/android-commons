@@ -6,16 +6,11 @@ import com.valartech.commons.network.google.Status.*
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-class Resource<out T>(status: Status, val data: T?, val message: String?) {
-
-    val status: Status? = status
-    get() = if (field?.isHandled == false) {
-        field.isHandled = true
-        field
-    } else {
-        null
-    }
-
+data class Resource<out T>(
+    val status: Status,
+    val data: T?,
+    val message: String?
+) {
 
     companion object {
         fun <T> success(data: T?): Resource<T> {
@@ -30,10 +25,6 @@ class Resource<out T>(status: Status, val data: T?, val message: String?) {
             return Resource(LOADING, data, null)
         }
     }
-
-//    fun getStatusIfNotHandled(): Status? {
-//        return status.isHandled.let { null } ?: status
-//    }
 }
 
 /**
@@ -42,14 +33,8 @@ class Resource<out T>(status: Status, val data: T?, val message: String?) {
  * These are usually created by the Repository classes where they return
  * `LiveData<Resource<T>>` to pass back the latest data to the UI with its fetch status.
  */
-//enum class Status {
-//    SUCCESS,
-//    ERROR,
-//    LOADING
-//}
-
-sealed class Status(var isHandled: Boolean = false) {
-    object SUCCESS: Status()
-    object ERROR: Status()
-    object LOADING: Status()
+enum class Status {
+    SUCCESS,
+    ERROR,
+    LOADING
 }
