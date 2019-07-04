@@ -41,6 +41,16 @@
             android:textColor="#fff"
             android:textSize="20sp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ee0000"
+            android:gravity="center"
+            android:tag="@string/ll_error"
+            android:text="Error!"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
     </com.valartech.commons.views.LoadingLayout>
 
     <Button
@@ -60,7 +70,20 @@
         android:layout_height="wrap_content"
         android:text="Empty"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/loadingOverlay" />
+        app:layout_constraintEnd_toStartOf="@+id/error"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/complete"
+        />
+
+    <Button
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/empty" />
 
     <Button
         android:id="@+id/complete"
@@ -68,7 +91,9 @@
         android:layout_height="wrap_content"
         android:text="Complete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/loading" />
+        app:layout_constraintEnd_toStartOf="@+id/empty"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/loadingOverlay"

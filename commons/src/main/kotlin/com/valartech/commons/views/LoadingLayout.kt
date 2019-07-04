@@ -34,6 +34,7 @@ class LoadingLayout @JvmOverloads constructor(
     private var completeView: View? = null
     private var emptyView: View? = null
     private var overlayView: View? = null
+    private var errorView: View? = null
     private val defaultState: Int
     private var currentState: Int? = null
     private val shortAnimDuration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
@@ -50,7 +51,7 @@ class LoadingLayout @JvmOverloads constructor(
     }
 
     @kotlin.annotation.Retention(AnnotationRetention.SOURCE)
-    @IntDef(LOADING, LOADING_OVERLAY, COMPLETE, EMPTY)
+    @IntDef(LOADING, LOADING_OVERLAY, COMPLETE, EMPTY, ERROR)
     annotation class ViewState
 
     override fun onFinishInflate() {
@@ -59,11 +60,13 @@ class LoadingLayout @JvmOverloads constructor(
         loadingView = getChildAt(0)
         completeView = getChildAt(1)
         emptyView = getChildAt(2)
+        errorView = getChildAt(3)
 
         //If views are specified with tags, override
         findViewWithTag<View?>(context.getString(R.string.ll_loading))?.let { loadingView = it }
         findViewWithTag<View?>(context.getString(R.string.ll_complete))?.let { completeView = it }
         findViewWithTag<View?>(context.getString(R.string.ll_empty))?.let { emptyView = it }
+        findViewWithTag<View?>(context.getString(R.string.ll_error))?.let { errorView = it }
 
         if (!isInEditMode) {
             if (loadingView == null) {
@@ -85,21 +88,25 @@ class LoadingLayout @JvmOverloads constructor(
                 loadingView?.visibility = View.GONE
                 completeView?.visibility = View.GONE
                 emptyView?.visibility = View.VISIBLE
+                errorView?.visibility = View.GONE
             }
             LOADING -> {
                 loadingView?.alpha = 1f
                 loadingView?.visibility = View.VISIBLE
                 completeView?.visibility = View.GONE
                 emptyView?.visibility = View.GONE
+                errorView?.visibility = View.GONE
             }
             LOADING_OVERLAY -> {
                 loadingView?.alpha = 1f
                 loadingView?.visibility = View.VISIBLE
                 completeView?.visibility = View.VISIBLE
                 emptyView?.visibility = View.GONE
+                errorView?.visibility = View.GONE
             }
             COMPLETE -> {
                 emptyView?.visibility = View.GONE
+                errorView?.visibility = View.GONE
                 if (isInEditMode) {
                     loadingView?.visibility = View.GONE
                     completeView?.visibility = View.VISIBLE
@@ -109,6 +116,12 @@ class LoadingLayout @JvmOverloads constructor(
                     loadingView?.visibility = View.GONE
                     completeView?.visibility = View.VISIBLE
                 }
+            }
+            ERROR -> {
+                loadingView?.visibility = View.GONE
+                completeView?.visibility = View.GONE
+                emptyView?.visibility = View.GONE
+                errorView?.visibility = View.VISIBLE
             }
         }
         currentState = viewState
@@ -152,5 +165,6 @@ class LoadingLayout @JvmOverloads constructor(
         const val LOADING_OVERLAY = 2
         const val COMPLETE = 3
         const val EMPTY = 4
+        const val ERROR = 5
     }
 }

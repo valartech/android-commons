@@ -4,4 +4,5 @@
     <string name="ll_loading">loading</string>
     <string name="ll_complete">complete</string>
     <string name="ll_empty">empty</string>
+    <string name="ll_error">error</string>
 </resources>

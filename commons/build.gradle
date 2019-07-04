@@ -6,11 +6,11 @@ apply plugin: 'org.jetbrains.dokka-android'
 
 
 static def getAppVersionCode() {
-    return 18
+    return 19
 }
 
 static def getAppVersionName() {
-    return "0.6.1"
+    return "0.7.0"
 }
 
 group = 'com.github.valartech'
@@ -90,7 +90,7 @@ dependencies {
     implementation "com.xwray:groupie:${groupie_version}"
     implementation "com.xwray:groupie-kotlin-android-extensions:${groupie_version}"
     implementation "com.jakewharton.threetenabp:threetenabp:1.2.0"
-    implementation "com.crashlytics.sdk.android:crashlytics:2.9.9"
+    implementation "com.crashlytics.sdk.android:crashlytics:2.10.1"
 }
 
 dokka {
