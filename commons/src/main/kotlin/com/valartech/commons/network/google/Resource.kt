@@ -8,21 +8,22 @@ import com.valartech.commons.network.google.Status.*
 </T> */
 data class Resource<out T>(
     val status: Status,
-    val data: T?,
-    val message: String?
+    val data: T? = null,
+    val message: String? = null,
+    val throwable: Throwable? = null
 ) {
 
     companion object {
         fun <T> success(data: T?): Resource<T> {
-            return Resource(SUCCESS, data, null)
+            return Resource(SUCCESS, data)
         }
 
-        fun <T> error(msg: String, data: T? = null): Resource<T> {
-            return Resource(ERROR, data, msg)
+        fun <T> error(msg: String, data: T? = null, throwable: Throwable? = null): Resource<T> {
+            return Resource(ERROR, data, msg, throwable)
         }
 
         fun <T> loading(data: T? = null): Resource<T> {
-            return Resource(LOADING, data, null)
+            return Resource(LOADING, data)
         }
     }
 }
