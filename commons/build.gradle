@@ -6,11 +6,11 @@ apply plugin: 'org.jetbrains.dokka-android'
 
 
 static def getAppVersionCode() {
-    return 20
+    return 21
 }
 
 static def getAppVersionName() {
-    return "0.7.1"
+    return "0.8.0"
 }
 
 group = 'com.github.valartech'

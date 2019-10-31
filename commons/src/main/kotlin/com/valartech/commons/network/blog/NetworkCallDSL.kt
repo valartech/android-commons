@@ -30,7 +30,7 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
 //                    val exception = AppException(e)
 //                    Timber.e(exception)
 //                    result.value = Resource.error(exception.message, null)
-                    result.value = Resource.error(e.message ?: "", null)
+                    result.value = Resource.error(e.message ?: "", null, e)
                 }
             }
         }
