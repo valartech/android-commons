@@ -1,6 +1,7 @@
 package com.valartech.commons.network.google
 
 import com.valartech.commons.network.google.Status.*
+import okhttp3.Response
 
 /**
  * A generic class that holds a value with its loading status.
@@ -10,7 +11,8 @@ data class Resource<out T>(
     val status: Status,
     val data: T? = null,
     val message: String? = null,
-    val throwable: Throwable? = null
+    val throwable: Throwable? = null,
+    val response: Response? = null
 ) {
 
     companion object {
@@ -18,8 +20,13 @@ data class Resource<out T>(
             return Resource(SUCCESS, data)
         }
 
-        fun <T> error(msg: String, data: T? = null, throwable: Throwable? = null): Resource<T> {
-            return Resource(ERROR, data, msg, throwable)
+        fun <T> error(
+            msg: String,
+            data: T? = null,
+            throwable: Throwable? = null,
+            okhttpResponse: Response? = null
+        ): Resource<T> {
+            return Resource(ERROR, data, msg, throwable, okhttpResponse)
         }
 
         fun <T> loading(data: T? = null): Resource<T> {

@@ -20,9 +20,14 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
         val result = MutableLiveData<Resource<DATA>>()
         result.value = Resource.loading(null)
         scope.launch {
+            var okHttpResponse: okhttp3.Response? = null
             try {
+                val httpResult = client.awaitResult()
+                if (httpResult is ResponseResult) {
+                    okHttpResponse = httpResult.response
+                }
                 @Suppress("UNCHECKED_CAST")
-                val response = client.awaitResult().getOrThrow() as DataResponse<DATA>
+                val response = httpResult.getOrThrow() as DataResponse<DATA>
                 withContext(Main) { result.value = Resource.success(response.retrieveData()) }
             } catch (e: Exception) {
                 withContext(Main) {
@@ -30,7 +35,7 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
 //                    val exception = AppException(e)
 //                    Timber.e(exception)
 //                    result.value = Resource.error(exception.message, null)
-                    result.value = Resource.error(e.message ?: "", null, e)
+                    result.value = Resource.error(e.message ?: "", null, e, okHttpResponse)
                 }
             }
         }
