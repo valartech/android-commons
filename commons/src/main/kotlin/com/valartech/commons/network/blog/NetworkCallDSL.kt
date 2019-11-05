@@ -20,11 +20,13 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
         val result = MutableLiveData<Resource<DATA>>()
         result.value = Resource.loading(null)
         scope.launch {
-            var okHttpResponse: okhttp3.Response? = null
+            var okHttpResponse: Response<*>? = null
             try {
                 val httpResult = client.awaitResult()
-                if (httpResult is ResponseResult) {
+                /*if (httpResult is ResponseResult) {
                     okHttpResponse = httpResult.response
+                } else*/ if (httpResult is CareCluesError) {
+                    okHttpResponse = httpResult.careCluesException
                 }
                 @Suppress("UNCHECKED_CAST")
                 val response = httpResult.getOrThrow() as DataResponse<DATA>

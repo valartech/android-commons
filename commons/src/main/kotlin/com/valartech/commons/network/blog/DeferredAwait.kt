@@ -31,7 +31,8 @@ suspend fun <T : Any> Deferred<Response<T>>.awaitResult(): HTTPResult<T> {
                     } else {
                         HTTPResult.Error(
                             HttpException(response),
-                            response.raw()
+                            response.raw(),
+                            response
                         )
                     }
                 )

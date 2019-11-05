@@ -12,7 +12,8 @@ data class Resource<out T>(
     val data: T? = null,
     val message: String? = null,
     val throwable: Throwable? = null,
-    val response: Response? = null
+    val response: Response? = null,
+    val retrofitResponse: retrofit2.Response<*>? = null
 ) {
 
     companion object {
@@ -24,9 +25,9 @@ data class Resource<out T>(
             msg: String,
             data: T? = null,
             throwable: Throwable? = null,
-            okhttpResponse: Response? = null
+            retrofitResponse: retrofit2.Response<*>? = null
         ): Resource<T> {
-            return Resource(ERROR, data, msg, throwable, okhttpResponse)
+            return Resource(ERROR, data, msg, throwable, retrofitResponse = retrofitResponse)
         }
 
         fun <T> loading(data: T? = null): Resource<T> {
