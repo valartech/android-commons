@@ -5,6 +5,7 @@ import com.valartech.commons.network.google.Resource
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 import retrofit2.Response
+import timber.log.Timber
 
 /**
  * https://proandroiddev.com/oversimplified-network-call-using-retrofit-livedata-kotlin-coroutines-and-dsl-512d08eadc16
@@ -20,13 +21,13 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
         val result = MutableLiveData<Resource<DATA>>()
         result.value = Resource.loading(null)
         scope.launch {
-            var okHttpResponse: Response<*>? = null
+            var retrofitResponse: Response<*>? = null
             try {
                 val httpResult = client.awaitResult()
                 /*if (httpResult is ResponseResult) {
                     okHttpResponse = httpResult.response
-                } else*/ if (httpResult is CareCluesError) {
-                    okHttpResponse = httpResult.careCluesException
+                } else*/ if (httpResult is ResponseError) {
+                    retrofitResponse = httpResult.errorResponse
                 }
                 @Suppress("UNCHECKED_CAST")
                 val response = httpResult.getOrThrow() as DataResponse<DATA>
@@ -35,9 +36,9 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
                 withContext(Main) {
                     //todo send out exception
 //                    val exception = AppException(e)
-//                    Timber.e(exception)
 //                    result.value = Resource.error(exception.message, null)
-                    result.value = Resource.error(e.message ?: "", null, e, okHttpResponse)
+                    Timber.e(e)
+                    result.value = Resource.error(e.message ?: "", null, e, retrofitResponse)
                 }
             }
         }
@@ -50,8 +51,11 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
  *
  * Usage details: https://proandroiddev.com/oversimplified-network-call-using-retrofit-livedata-kotlin-coroutines-and-dsl-512d08eadc16
  */
-fun <RESPONSE : DataResponse<*>, DATA : Any> networkCall(scope: CoroutineScope = GlobalScope, block: CallHandler<RESPONSE, DATA>.() -> Unit)
-        : MutableLiveData<Resource<DATA>> = CallHandler<RESPONSE, DATA>().apply(block).makeCall(scope)
+fun <RESPONSE : DataResponse<*>, DATA : Any> networkCall(
+    scope: CoroutineScope = GlobalScope,
+    block: CallHandler<RESPONSE, DATA>.() -> Unit
+)
+    : MutableLiveData<Resource<DATA>> = CallHandler<RESPONSE, DATA>().apply(block).makeCall(scope)
 
 interface DataResponse<T> {
     fun retrieveData(): T
