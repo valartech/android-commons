@@ -18,10 +18,9 @@ suspend fun <T : Any> Deferred<Response<T>>.awaitResult(): HTTPResult<T> {
                         body?.let {
                             HTTPResult.Ok(it, response.raw())
                         } ?: "error".let {
-                            if (response.code() == 200){
+                            if (response.code() == 200) {
                                 HTTPResult.Exception(Exception("body is empty"))
-                            }
-                            else{
+                            } else {
                                 HTTPResult.Exception(
                                     NullPointerException("Response body is null")
                                 )
@@ -31,12 +30,11 @@ suspend fun <T : Any> Deferred<Response<T>>.awaitResult(): HTTPResult<T> {
                     } else {
                         HTTPResult.Error(
                             HttpException(response),
-                            response.raw()
+                            response
                         )
                     }
                 )
-            }
-            catch (e:Throwable){
+            } catch (e: Throwable) {
                 //  Log.e("DeferredAwait",e.message)
                 continuation.resume(HTTPResult.Exception(e))
             }
@@ -44,7 +42,6 @@ suspend fun <T : Any> Deferred<Response<T>>.awaitResult(): HTTPResult<T> {
         registerOnCompletion(continuation)
     }
 }
-
 
 
 private fun Deferred<Response<*>>.registerOnCompletion(continuation: CancellableContinuation<*>) {
