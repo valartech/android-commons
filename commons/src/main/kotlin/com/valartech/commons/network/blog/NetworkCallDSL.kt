@@ -24,9 +24,7 @@ class CallHandler<RESPONSE : Any, DATA : Any> {
             var retrofitResponse: Response<*>? = null
             try {
                 val httpResult = client.awaitResult()
-                /*if (httpResult is ResponseResult) {
-                    okHttpResponse = httpResult.response
-                } else*/ if (httpResult is ResponseError) {
+                if (httpResult is HTTPResult.Error) {
                     retrofitResponse = httpResult.errorResponse
                 }
                 @Suppress("UNCHECKED_CAST")
