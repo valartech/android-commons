@@ -7,6 +7,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.IntDef
+import androidx.annotation.StringRes
+import androidx.core.view.children
 import com.valartech.commons.R
 
 /**
@@ -63,10 +65,10 @@ class LoadingLayout @JvmOverloads constructor(
         errorView = getChildAt(3)
 
         //If views are specified with tags, override
-        findViewWithTag<View?>(context.getString(R.string.ll_loading))?.let { loadingView = it }
-        findViewWithTag<View?>(context.getString(R.string.ll_complete))?.let { completeView = it }
-        findViewWithTag<View?>(context.getString(R.string.ll_empty))?.let { emptyView = it }
-        findViewWithTag<View?>(context.getString(R.string.ll_error))?.let { errorView = it }
+        findChildViewWithTag(R.string.ll_loading)?.let { loadingView = it }
+        findChildViewWithTag(R.string.ll_complete)?.let { completeView = it }
+        findChildViewWithTag(R.string.ll_empty)?.let { emptyView = it }
+        findChildViewWithTag(R.string.ll_error)?.let { errorView = it }
 
         if (!isInEditMode) {
             if (loadingView == null) {
@@ -111,8 +113,12 @@ class LoadingLayout @JvmOverloads constructor(
                     loadingView?.visibility = View.GONE
                     completeView?.visibility = View.VISIBLE
                 } else if (currentState == LOADING) {
+                    //if we're showing results after loading, animate the appearance of the
+                    //complete view
                     crossfadeCompleteView()
                 } else {
+                    //if we're showing the complete state in any other case, then just show the
+                    //view immediately
                     loadingView?.visibility = View.GONE
                     completeView?.visibility = View.VISIBLE
                 }
@@ -157,6 +163,18 @@ class LoadingLayout @JvmOverloads constructor(
                     loadingView?.visibility = View.GONE
                 }
             })
+    }
+
+    /**
+     * Searches only the direct children of this view for a child view with the specified tag.
+     */
+    private fun findChildViewWithTag(@StringRes tagRes: Int): View? {
+        children.forEach {
+            if (context.getString(tagRes) == it.tag) {
+                return it
+            }
+        }
+        return null
     }
 
     companion object {

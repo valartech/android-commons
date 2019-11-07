@@ -44,7 +44,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ee0000"
+            android:background="#ff0000"
             android:gravity="center"
             android:tag="@string/ll_error"
             android:text="Error!"
