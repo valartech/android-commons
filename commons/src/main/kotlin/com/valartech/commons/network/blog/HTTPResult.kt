@@ -24,10 +24,9 @@ sealed class HTTPResult<out T : Any> {
      */
     class Error(
         override val exception: HttpException,
-        override val errorResponse: retrofit2.Response<*>? = null
+        val errorResponse: retrofit2.Response<*>? = null
     ) : HTTPResult<Nothing>(),
-        ErrorResult,
-        ResponseError {
+        ErrorResult {
         override fun toString() = "HTTPResult.Error{exception=$exception}"
     }
 
@@ -56,10 +55,6 @@ interface ResponseResult {
  */
 interface ErrorResult {
     val exception: Throwable
-}
-
-interface ResponseError {
-    val errorResponse: retrofit2.Response<*>?
 }
 
 /**
