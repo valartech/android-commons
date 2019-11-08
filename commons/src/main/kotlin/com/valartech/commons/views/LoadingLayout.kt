@@ -40,6 +40,14 @@ class LoadingLayout @JvmOverloads constructor(
     private val defaultState: Int
     private var currentState: Int? = null
     private val shortAnimDuration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+    /**
+     * Duration of the crossfade animation for LOADING -> COMPLETE. Set to 0 to disable.
+     */
+    var animationDuration = shortAnimDuration
+    set(value) {
+        require(value >= 0) { "Duration needs to be >= 0" }
+        field = value
+    }
 
     init {
         //get values from attrs
@@ -149,7 +157,7 @@ class LoadingLayout @JvmOverloads constructor(
             // listener set on the view.
             animate()
                 .alpha(1f)
-                .setDuration(shortAnimDuration)
+                .setDuration(animationDuration)
                 .setListener(null)
         }
         // Animate the loading view to 0% opacity. After the animation ends,
@@ -157,7 +165,7 @@ class LoadingLayout @JvmOverloads constructor(
         // participate in layout passes, etc.)
         loadingView?.animate()
             ?.alpha(0f)
-            ?.setDuration(shortAnimDuration)
+            ?.setDuration(animationDuration)
             ?.setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     loadingView?.visibility = View.GONE
