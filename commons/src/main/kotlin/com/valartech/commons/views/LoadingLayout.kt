@@ -69,7 +69,6 @@ class LoadingLayout @JvmOverloads constructor(
         //Use the default order to find views
         loadingView = getChildAt(0)
         completeView = getChildAt(1)
-        //overlay
         emptyView = getChildAt(2)
         errorView = getChildAt(3)
 
@@ -90,6 +89,7 @@ class LoadingLayout @JvmOverloads constructor(
         //add in overlay view
         overlayView = View.inflate(context, R.layout.loading_layout_overlay, null)
         addView(overlayView)
+
         //make sure the views are in order
         errorView?.bringToFront() //bottom-most
         emptyView?.bringToFront()
