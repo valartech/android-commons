@@ -69,6 +69,7 @@ class LoadingLayout @JvmOverloads constructor(
         //Use the default order to find views
         loadingView = getChildAt(0)
         completeView = getChildAt(1)
+        //overlay
         emptyView = getChildAt(2)
         errorView = getChildAt(3)
 
@@ -86,6 +87,17 @@ class LoadingLayout @JvmOverloads constructor(
                 throw IllegalStateException("Either loading or complete view is missing. Both are required")
             }
         }
+        //add in overlay view
+        overlayView = View.inflate(context, R.layout.loading_layout_overlay, null)
+        addView(overlayView)
+        //make sure the views are in order
+        errorView?.bringToFront() //bottom-most
+        emptyView?.bringToFront()
+        completeView?.bringToFront()
+        overlayView?.bringToFront()
+        loadingView?.bringToFront() //top-most
+        invalidate()
+
         //default state
         currentState = defaultState
         setState(defaultState)
@@ -99,6 +111,7 @@ class LoadingLayout @JvmOverloads constructor(
                 completeView?.visibility = View.GONE
                 emptyView?.visibility = View.VISIBLE
                 errorView?.visibility = View.GONE
+                overlayView?.visibility = View.GONE
             }
             LOADING -> {
                 loadingView?.alpha = 1f
@@ -106,6 +119,7 @@ class LoadingLayout @JvmOverloads constructor(
                 completeView?.visibility = View.GONE
                 emptyView?.visibility = View.GONE
                 errorView?.visibility = View.GONE
+                overlayView?.visibility = View.GONE
             }
             LOADING_OVERLAY -> {
                 loadingView?.alpha = 1f
@@ -113,10 +127,12 @@ class LoadingLayout @JvmOverloads constructor(
                 completeView?.visibility = View.VISIBLE
                 emptyView?.visibility = View.GONE
                 errorView?.visibility = View.GONE
+                overlayView?.visibility = View.VISIBLE
             }
             COMPLETE -> {
                 emptyView?.visibility = View.GONE
                 errorView?.visibility = View.GONE
+                overlayView?.visibility = View.GONE
                 if (isInEditMode) {
                     loadingView?.visibility = View.GONE
                     completeView?.visibility = View.VISIBLE
@@ -136,6 +152,7 @@ class LoadingLayout @JvmOverloads constructor(
                 completeView?.visibility = View.GONE
                 emptyView?.visibility = View.GONE
                 errorView?.visibility = View.VISIBLE
+                overlayView?.visibility = View.GONE
             }
         }
         currentState = viewState

@@ -1,7 +1,6 @@
 package com.valartech.commons.network.google
 
 import com.valartech.commons.network.google.Status.*
-import okhttp3.Response
 
 /**
  * A generic class that holds a value with its loading status.
@@ -12,7 +11,6 @@ data class Resource<out T>(
     val data: T? = null,
     val message: String? = null,
     val throwable: Throwable? = null,
-    val response: Response? = null,
     val retrofitResponse: retrofit2.Response<*>? = null
 ) {
 
@@ -27,7 +25,7 @@ data class Resource<out T>(
             throwable: Throwable? = null,
             retrofitResponse: retrofit2.Response<*>? = null
         ): Resource<T> {
-            return Resource(ERROR, data, msg, throwable, retrofitResponse = retrofitResponse)
+            return Resource(ERROR, data, msg, throwable, retrofitResponse)
         }
 
         fun <T> loading(data: T? = null): Resource<T> {

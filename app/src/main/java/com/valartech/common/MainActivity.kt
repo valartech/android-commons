@@ -1,6 +1,7 @@
 package com.valartech.common
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.valartech.commons.views.LoadingLayout.Companion.COMPLETE
 import com.valartech.commons.views.LoadingLayout.Companion.EMPTY
@@ -20,5 +21,9 @@ class MainActivity : AppCompatActivity() {
         complete.setOnClickListener { mainLoadingLayout.setState(COMPLETE) }
         empty.setOnClickListener { mainLoadingLayout.setState(EMPTY) }
         error.setOnClickListener { mainLoadingLayout.setState(ERROR) }
+
+        test_button.setOnClickListener {
+            Toast.makeText(this, "Test button pressed!", Toast.LENGTH_SHORT).show()
+        }
     }
 }

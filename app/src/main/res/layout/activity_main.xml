@@ -31,15 +31,30 @@
             android:layout_gravity="center"
             android:tag="@string/ll_loading" />
 
-        <TextView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#404b50"
-            android:gravity="center"
-            android:tag="@string/ll_complete"
-            android:text="Completed!"
-            android:textColor="#fff"
-            android:textSize="20sp" />
+            android:tag="@string/ll_complete">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#404b50"
+                android:gravity="center"
+                android:text="Completed!"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                />
+
+            <Button
+                android:id="@+id/test_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Test button"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="50dp"
+                />
+        </FrameLayout>
 
         <TextView
             android:layout_width="match_parent"
