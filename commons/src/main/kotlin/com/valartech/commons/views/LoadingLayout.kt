@@ -40,6 +40,14 @@ class LoadingLayout @JvmOverloads constructor(
     private val defaultState: Int
     private var currentState: Int? = null
     private val shortAnimDuration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+
+    var overlayColorRes: Int? = null
+    set(value) {
+        value?.let {
+            overlayView?.setBackgroundResource(value)
+            field = value
+        }
+    }
     /**
      * Duration of the crossfade animation for LOADING -> COMPLETE. Set to 0 to disable.
      */
@@ -66,6 +74,8 @@ class LoadingLayout @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
+
+
         //Use the default order to find views
         loadingView = getChildAt(0)
         completeView = getChildAt(1)

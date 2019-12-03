@@ -8,5 +8,10 @@
             <enum name="empty" value="4" />
             <enum name="error" value="5" />
         </attr>
+        <attr name="overlay_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="LoadingLayoutTheme">
+        <attr format="reference" name="loadingLayoutStyle"/>
     </declare-styleable>
 </resources>
