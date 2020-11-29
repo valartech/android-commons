@@ -3,6 +3,7 @@ package com.valartech.commons.views
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -10,6 +11,7 @@ import androidx.annotation.IntDef
 import androidx.annotation.StringRes
 import androidx.core.view.children
 import com.valartech.commons.R
+import org.jetbrains.anko.backgroundColor
 
 /**
  * Layout with support for easily switching between a loading state, a final loaded state and an
@@ -38,6 +40,7 @@ class LoadingLayout @JvmOverloads constructor(
     private var overlayView: View? = null
     private var errorView: View? = null
     private val defaultState: Int
+    private val overlayTint: Int
     private var currentState: Int? = null
     private val shortAnimDuration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
     /**
@@ -57,6 +60,7 @@ class LoadingLayout @JvmOverloads constructor(
         )
 
         defaultState = a.getInt(R.styleable.LoadingLayout_default_state, COMPLETE)
+        overlayTint = a.getColor(R.styleable.LoadingLayout_overlay_tint, Color.TRANSPARENT)
         a.recycle()
     }
 
@@ -88,6 +92,7 @@ class LoadingLayout @JvmOverloads constructor(
         }
         //add in overlay view
         overlayView = View.inflate(context, R.layout.loading_layout_overlay, null)
+        overlayView?.backgroundColor = overlayTint
         addView(overlayView)
 
         //make sure the views are in order
@@ -105,6 +110,9 @@ class LoadingLayout @JvmOverloads constructor(
     }
 
     fun setState(@ViewState viewState: Int) {
+        if (viewState == currentState) {
+            return
+        }
         when (viewState) {
             EMPTY -> {
                 loadingView?.visibility = View.GONE

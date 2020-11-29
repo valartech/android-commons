@@ -6,23 +6,23 @@ apply plugin: 'org.jetbrains.dokka-android'
 
 
 static def getAppVersionCode() {
-    return 29
+    return 30
 }
 
 static def getAppVersionName() {
-    return "0.10.0"
+    return "0.11.0"
 }
 
 group = 'com.github.valartech'
 version = getAppVersionName()
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion versions.compile_sdk
 
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 28
+        minSdkVersion versions.min_sdk
+        targetSdkVersion versions.target_sdk
         versionCode getAppVersionCode()
         versionName getAppVersionName()
 

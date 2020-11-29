@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
+        app:overlay_tint="#80ffcccc"
         app:layout_constraintBottom_toTopOf="@id/loading"
         app:layout_constraintTop_toTopOf="parent">
 
