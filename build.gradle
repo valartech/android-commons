@@ -3,9 +3,9 @@
 buildscript {
     ext {
         versions = [
-                min_sdk    : 21,
-                compile_sdk: 30,
-                target_sdk : 30
+                min_sdk    : 16,
+                compile_sdk: 28,
+                target_sdk : 28
         ]
 
         kotlin_version = '1.4.20'
