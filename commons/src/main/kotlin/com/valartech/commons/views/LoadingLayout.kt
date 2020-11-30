@@ -41,6 +41,7 @@ class LoadingLayout @JvmOverloads constructor(
     private var errorView: View? = null
     private val defaultState: Int
     private val overlayTint: Int
+    private val crossFadeSuccess: Boolean
     private var currentState: Int? = null
     private val shortAnimDuration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
     /**
@@ -61,6 +62,7 @@ class LoadingLayout @JvmOverloads constructor(
 
         defaultState = a.getInt(R.styleable.LoadingLayout_default_state, COMPLETE)
         overlayTint = a.getColor(R.styleable.LoadingLayout_overlay_tint, Color.TRANSPARENT)
+        crossFadeSuccess = a.getBoolean(R.styleable.LoadingLayout_cross_fade_success, true)
         a.recycle()
     }
 
@@ -104,9 +106,7 @@ class LoadingLayout @JvmOverloads constructor(
         invalidate()
 
         //default state
-        currentState = defaultState
         setState(defaultState)
-
     }
 
     fun setState(@ViewState viewState: Int) {
@@ -144,7 +144,7 @@ class LoadingLayout @JvmOverloads constructor(
                 if (isInEditMode) {
                     loadingView?.visibility = View.GONE
                     completeView?.visibility = View.VISIBLE
-                } else if (currentState == LOADING) {
+                } else if (currentState == LOADING && crossFadeSuccess) {
                     //if we're showing results after loading, animate the appearance of the
                     //complete view
                     crossfadeCompleteView()
