@@ -11,7 +11,6 @@ import androidx.annotation.IntDef
 import androidx.annotation.StringRes
 import androidx.core.view.children
 import com.valartech.commons.R
-import org.jetbrains.anko.backgroundColor
 
 /**
  * Layout with support for easily switching between a loading state, a final loaded state and an
@@ -94,7 +93,7 @@ class LoadingLayout @JvmOverloads constructor(
         }
         //add in overlay view
         overlayView = View.inflate(context, R.layout.loading_layout_overlay, null)
-        overlayView?.backgroundColor = overlayTint
+        overlayView?.setBackgroundColor(overlayTint)
         addView(overlayView)
 
         //make sure the views are in order
