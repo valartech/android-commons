@@ -3,9 +3,6 @@ package com.valartech.commons.utils.extensions
 
 import android.content.Context
 import android.widget.Toast
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
 
 /*
  * Copyright 2016 JetBrains s.r.o.

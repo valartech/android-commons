@@ -2,6 +2,7 @@ package com.valartech.commons.utils.timber
 
 import timber.log.Timber
 
+
 /**
  * Prints out logs to the standard Java Console so that they're viewable during tests.
  *
